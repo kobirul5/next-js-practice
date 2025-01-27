@@ -1,8 +1,7 @@
-import Link from 'next/link';
-import React from 'react';
+import Link from "next/link";
 
-const Services = () => {
-
+const ServicesDetails = ({ params }) => {
+    const id = params.id
     const services = [
         {
             id: 1,
@@ -78,27 +77,23 @@ const Services = () => {
         }
     ];
 
-    
+    const singleData = services.find(d => d.id === parseFloat(id));
+    console.log(singleData, id, services)
     return (
         <div>
-            Services
-            <section className="grid grid-cols-4 gap-5">
-                {
-                    services.map((service) =>
-                        <div key={service.id} className="card bg-base-100 shadow-xl">
-                            <div className="card-body items-center text-center">
-                                <h2 className="card-title">{service.name}</h2>
-                                <p>{service.price}</p>
-                                <div className="card-actions">
-                                    <Link href={`/services/${service.id}`} className="btn btn-primary">View Details</Link>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                }
-            </section>
+            <h2 className="text-4xl font-bold text-center my-14">Service Details</h2>
+            <div className="card bg-base-100 max-w-[70%] mx-auto  shadow-xl">
+                <div className="card-body items-center text-center">
+                    <h2 className="card-title">{singleData.name}</h2>
+                    <p>{singleData.description}</p>
+                    <p>{singleData.price} </p>
+                    <div className="card-actions">
+                        <button className="btn btn-primary">Buy Now</button>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
 
-export default Services;
+export default ServicesDetails;
